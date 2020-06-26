@@ -51,8 +51,10 @@ def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int
                     temp.append(j) 
                     #print(temp)
         if temp != []: curr = temp
+        #3 [[1,0],[1,2],[0,1]], second condition to avoid error: [2,2,1,0]
         elif max(level)<0 and len(res)==numCourses:
             return res
+        #3 [[1,0],[1,2],[0,1]], error: time limited exceed
         else:
             return []
     return []
