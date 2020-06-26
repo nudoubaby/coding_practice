@@ -28,3 +28,31 @@ def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
         else:
             return False
     return False   
+
+# 210. Course Schedule II
+def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
+    # courses whose prerequisites is lesest
+    # chourse which is not a prerequirsite of others
+    d = collections.defaultdict(list)
+    level = numCourses*[0]
+    for a, b in prerequisites: #b is a's prerequisiste
+        d[b].append(a)
+        level[a] += 1
+    res = []
+    curr = [i for i in range(numCourses) if level[i]==0]
+    while curr:
+        temp = []
+        for i in curr:
+            level[i] -= 1
+            res.append(i)
+            for j in d[i]: 
+                level[j] -= 1
+                if level[j]== 0: 
+                    temp.append(j) 
+                    #print(temp)
+        if temp != []: curr = temp
+        elif max(level)<0 and len(res)==numCourses:
+            return res
+        else:
+            return []
+    return []
